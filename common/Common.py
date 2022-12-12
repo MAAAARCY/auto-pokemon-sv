@@ -66,11 +66,11 @@ class Common(JoycontrolPlugin):
     async def make_sandwich(self):
         await self.move_hands(tilt_angle=180, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=45)
-        await self.move_hands(tilt_angle=0, move_sec=0.3)
+        await self.move_hands(tilt_angle=0, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=90)
         await self.move_hands(tilt_angle=0, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=135)
-        await self.move_hands(tilt_angle=180, move_sec=0.3, wait_sec=5.0)
+        await self.move_hands(tilt_angle=180, move_sec=0.4, wait_sec=5.0)
         #バンズを置く
         await self.button_ctl('a', wait_sec=3.0)
         #ピックを刺す
