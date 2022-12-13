@@ -64,11 +64,11 @@ class Common(JoycontrolPlugin):
         await self.button_ctl('a', wait_sec=10.0)
     
     async def make_sandwich(self):
-        await self.move_hands(tilt_angle=180, move_sec=0.45)
+        await self.move_hands(tilt_angle=180, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=45)
         await self.move_hands(tilt_angle=0, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=90)
-        await self.move_hands(tilt_angle=0, move_sec=0.45)
+        await self.move_hands(tilt_angle=0, move_sec=0.4)
         await self.grab_and_drop_ingredients(tilt_angle=135)
         await self.move_hands(tilt_angle=180, move_sec=0.4, wait_sec=5.0)
         #バンズを置く
@@ -81,20 +81,17 @@ class Common(JoycontrolPlugin):
         await self.button_ctl('a', wait_sec=1.0)
         logger.info('サンドイッチの制作を終了します')
     
-    async def grab_and_drop_ingredients(self, tilt_angle=90):
+    async def grab_and_drop_ingredients(self, tilt_angle=90, move_sec=0.6):
         #具材へ手を運ぶ
-        await self.move_hands(tilt_angle=tilt_angle)
+        await self.move_hands(tilt_angle=tilt_angle, move_sec=move_sec)
         #具材をつかんで落とす
         await self.button_press('a')
         await self.wait(0.5)
-        await self.left_stick(angle=tilt_angle+180)
-        await self.wait(0.5)
-        await self.left_stick('center')
-        await self.wait(0.5)
+        await self.move_hands(tilt_angle=tilt_angle+180, move_sec=move_sec)
         await self.button_release('a')
         await self.wait(0.5)
 
-    async def move_hands(self, tilt_angle=180, move_sec=0.6, wait_sec=0.5):
+    async def move_hands(self, tilt_angle=180, move_sec=0.5, wait_sec=0.5):
         await self.left_stick(angle=tilt_angle)
         await self.wait(move_sec)
         await self.left_stick('center')
