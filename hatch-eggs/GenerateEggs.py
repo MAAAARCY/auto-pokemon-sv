@@ -44,10 +44,18 @@ class GenerateEggs(Common):
         await self.wait(0.3)
 
         while time.time() < limit_time:
-            await self.button_ctl('a', wait_sec=1.0)
+            await self.button_ctl('a', wait_sec=0.8)
+            await self.button_ctl('a', wait_sec=0.8)
+            await self.button_ctl('b', wait_sec=0.8)
+            await self.button_ctl('b', wait_sec=240.0)
 
-            if notice_time < time.time():
-                logger.info('あと{}秒です'.format(round(limit_time-notice_time)))
-                notice_time += 60
+            idx = 0
+            while idx < 60:
+                idx += 1
+                await self.button_ctl('a', wait_sec=0.8)
+
+            #if notice_time < time.time():
+            #    logger.info('あと{}秒です'.format(round(limit_time-notice_time)))
+            #   notice_time += 60
         
         logger.info('30分経過したので孵化の観察を終了します')
